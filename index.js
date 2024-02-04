@@ -14,7 +14,8 @@ form.addEventListener('submit',(event)=>{
     }
     const getDataFromLocal = JSON.parse(localStorage.getItem('expenseList')) ?? [];
     // getDataFromLocal.push(obj);
-    if(isEdit){
+    
+     if(isEdit){
         getDataFromLocal[editIndex] = obj;
         isEdit = false;
     }else{
@@ -43,11 +44,12 @@ function displayUser(){
         const dltBtn = document.createElement('button');
         dltBtn.textContent = 'Delete Expense'
         dltBtn.style.marginLeft = '5px'
+        dltBtn.value = i;
         listItem.appendChild(dltBtn);
 
         dltBtn.addEventListener('click',function(event){
             const getDataFromLocal = JSON.parse(localStorage.getItem('expenseList'));
-            getDataFromLocal.splice(0,1);
+            getDataFromLocal.splice(event.target.value,1);
             localStorage.setItem('expenseList',JSON.stringify(getDataFromLocal));
             displayUser();
         })
